@@ -19,6 +19,10 @@ module Refinery
         end
       end
 
+      initializer "register oembed providers" do
+        OEmbed::Providers.register_all
+      end
+
       config.to_prepare do
         require 'refinerycms-pages'
         Refinery::Page.send :has_many_page_images
@@ -26,6 +30,7 @@ module Refinery
         Refinery::Image.module_eval do
           has_many :image_pages, :dependent => :destroy
         end
+
       end
 
       config.after_initialize do

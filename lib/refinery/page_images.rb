@@ -1,4 +1,5 @@
 require 'refinerycms-core'
+require 'oembed'
 
 module Refinery
   autoload :PageImagesGenerator, 'generators/refinery/page_images_generator'

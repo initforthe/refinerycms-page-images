@@ -26,8 +26,8 @@ module Refinery
             image_pages_to_delete.destroy_all
 
             data.each do |i, image_data|
-              image_page_id, image_id, caption =
-                image_data.values_at('image_page_id', 'id', 'caption')
+              image_page_id, image_id, caption, oembed_url =
+                image_data.values_at('image_page_id', 'id', 'caption', 'oembed_url')
 
               next if image_id.blank?
 
@@ -39,6 +39,7 @@ module Refinery
 
               image_page.position = i
               image_page.caption = caption if Refinery::PageImages.captions
+              image_page.oembed_url = oembed_url if Refinery::PageImages.oembed
               image_page.save
             end
           end
@@ -50,13 +51,16 @@ module Refinery
       end
 
       module InstanceMethods
-
         def caption_for_image_index(index)
-          self.image_pages[index].try(:caption).presence || ""
+          image_pages[index].try(:caption).to_s
         end
 
         def image_page_id_for_image_index(index)
-          self.image_pages[index].try(:id)
+          image_pages[index].try(:id)
+        end
+
+        def oembed_url_for_image_index(index)
+          image_pages[index].try(:oembed_url).presence
         end
       end
     end
