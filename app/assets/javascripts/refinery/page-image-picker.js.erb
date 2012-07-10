@@ -154,7 +154,7 @@ reindex_images = function() {
     $(input).attr('data-old-id', $(input).attr('data-old-id').replace(/_\d_/, '_'+i+'_').replace(/_\d/, '_' + i));
   });
   $('#page_images li').each(function(i, li){
-    $('input:hidden', li).each(function() {
+    $('input:hidden, input.page_oembed_url', li).each(function() {
       // make the image's name consistent with its position.
       parts = $(this).attr('name').split(']');
       parts[1] = ('[' + i);
