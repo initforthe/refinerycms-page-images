@@ -16,12 +16,13 @@ module Refinery
     end
 
     def oembed(options = nil)
-      oembed_data[options] ||= begin
-        OEmbed::Providers.get(oembed_url, options).fields
-      rescue OEmbed::Error => e
-        nil
-      end        
+      if oembed_data[options].blank?
+        oembed_data[options] = OEmbed::Providers.get(oembed_url, options.dup).fields
+        save
+      end
       oembed_data[options].try(:[], 'html')
+    rescue OEmbed::Error => e
+      nil
     end
 
     private
