@@ -107,7 +107,6 @@ open_image_caption = function(e) {
   textarea = list_item.find('.textarea_wrapper_for_wym > textarea');
 
   textarea.after($("<div class='form-actions'><div class='form-actions-left'><a class='button'><%= I18n.t('refinery.js.admin.page_images.done') %></a></div></div>"));
-  console.log(textarea.parent());
   /*
     This seems to, for the actively selected image, take the
     'textarea_wrapper_for_wym' and turn it into a modal, and then drop it back
@@ -127,7 +126,6 @@ open_image_caption = function(e) {
 
   $(textarea.parent()).find('.hidden_fields_for_caption').show();
   $(textarea.parent()).find('.initially_hidden').show();
-  console.log($(textarea.parent()).find('hidden_fields_for_caption'));
 
   $('.ui-dialog:visible .ui-dialog-titlebar-close, .ui-dialog:visible .form-actions a.button')
     .on('click',
