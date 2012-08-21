@@ -8,19 +8,28 @@
         <%= hidden_field_tag "#{f.object_name.demodulize}[images_attributes][#{index}][image_page_id]", f.object.image_page_id_for_image_index(index) %>
         <% if Refinery::PageImages.captions %>
           <div class='textarea_wrapper_for_wym'>
+            <!-- included for every image on both modal and inline image views --> 
+            <div class="hidden_fields_for_caption">
+              <%= label_tag "page_link_to_#{index}", 'Links to ' %>
+              <%= text_field_tag "#{f.object_name.demodulize}[images_attributes][#{index}][link_to]",
+                            f.object.link_to_for_image_index(index),
+                            :id => "page_link_to_#{index}",
+                            :class => 'page_link_to larger widest' %>
+              <% if Refinery::PageImages.oembed %>
+                <%= label_tag "page_oembed_url_#{index}", 'Vimeo URL ' %>
+                <%= text_field_tag "#{f.object_name.demodulize}[images_attributes][#{index}][oembed_url]",
+                                  f.object.oembed_url_for_image_index(index),
+                                  :id => "page_oembed_url_#{index}",
+                                  :class => 'page_oembed_url larger widest' %>
+              <% end %>
+            </div>
+            <%= label_tag "page_captions_#{index}", 'Image caption ', :class => 'textarea initially_hidden' %>
             <%= text_area_tag "#{f.object_name.demodulize}[images_attributes][#{index}][caption]",
                               f.object.caption_for_image_index(index),
                               :style => 'display: none',
                               :id => "page_captions_#{index}",
                               :class => 'page_caption' %>
           </div>
-        <% end %>
-        <% if Refinery::PageImages.oembed %>
-          <%= text_field_tag "#{f.object_name.demodulize}[images_attributes][#{index}][oembed_url]",
-                            f.object.oembed_url_for_image_index(index),
-                            :id => "page_oembed_url_#{index}",
-                            :style => 'width: 135px',
-                            :class => 'page_oembed_url' %>
         <% end %>
       </li>
     <% end %>

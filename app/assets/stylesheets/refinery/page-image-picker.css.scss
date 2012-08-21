@@ -45,7 +45,28 @@
     width: 135px;
     height: 135px;
   }
+  #page_images .hidden_fields_for_caption {
+    display: none;
+  }
 }
+
+.textarea_wrapper_for_wym {
+  label.textarea { margin-left: 10px; }
+  .initially_hidden {
+    display: none;
+  }
+}
+
+.hidden_fields_for_caption {
+  width: 300px;
+  padding: 10px;
+  label {
+    margin-right: 20px;
+  }
+  input {
+  }
+}
+
 
 a#add_image_link {
   margin-top: 0;
